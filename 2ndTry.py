@@ -23,5 +23,5 @@ model = RandomForestClassifier(n_estimators=100, max_depth=5, random_state=1)
 model.fit(X, y)
 predictions = model.predict(X_test)
 output = pd.DataFrame({'PassengerId': test.PassengerId, 'Survived': predictions})
-output.to_csv('submission.csv', index=False)
+output.to_csv('submission2.csv', index=False)
 

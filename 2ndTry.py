@@ -25,3 +25,4 @@ predictions = model.predict(X_test)
 output = pd.DataFrame({'PassengerId': test.PassengerId, 'Survived': predictions})
 output.to_csv('submission2.csv', index=False)
 
+print(data.isna().sum())

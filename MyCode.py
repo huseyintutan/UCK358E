@@ -88,12 +88,33 @@ output = pd.DataFrame(
     {'PassengerId': test.PassengerId, 'Survived': predictions})
 output.to_csv('submission1.csv', index=False)
 
+# COMPUTE CROSS-VALIDATION SCORE
 
 scores = cross_val_score(model, X, y, cv=5)
 print("Cross-validation scores:", scores)
 print("Mean score:", scores.mean())
 
 # COMPUTE ACCURACY SCORE
+
 train_predictions = model.predict(X)
 accuracy = accuracy_score(y, train_predictions)
 print("Train accuracy:", accuracy)
+
+import seaborn as sns
+
+# Correlation matrix
+corr_matrix = data.corr()
+
+# Generate a mask for the upper triangle
+mask = np.triu(np.ones_like(corr_matrix, dtype=bool))
+
+# Set up the matplotlib figure
+fig, ax = plt.subplots(figsize=(10, 8))
+
+# Generate a custom diverging colormap
+cmap = sns.diverging_palette(230, 20, as_cmap=True)
+
+# Draw the heatmap with the mask and correct aspect ratio
+sns.heatmap(corr_matrix, mask=mask, cmap=cmap, vmax=.3, center=0, annot=True,
+            square=True, linewidths=.5, cbar_kws={"shrink": .5})
+plt.show()
